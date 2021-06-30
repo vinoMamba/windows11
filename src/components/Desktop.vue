@@ -24,11 +24,23 @@
       </ul>
       <ul class="nav-notice">
         <li>
-
+          <SvgIcon name="up"></SvgIcon>
         </li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>
+          <SvgIcon name="speaker"></SvgIcon>
+        </li>
+        <li>
+          <SvgIcon name="wifi"></SvgIcon>
+        </li>
+        <li>
+          <div class="date-picker">
+            <span>17:50</span>
+            <span>2021/6/30</span>
+          </div>
+        </li>
+        <li>
+          <SvgIcon name="drawer"></SvgIcon>
+        </li>
       </ul>
     </nav>
   </div>
@@ -67,9 +79,9 @@ export default defineComponent({
   }
 
   &-nav {
-    padding: 4px;
+    padding: 0 4px;
     display: grid;
-    grid-template-columns:25% auto 25%;
+    grid-template-columns:20% auto 20%;
     grid-template-rows: 100%;
     justify-content: space-between;
     border-radius: 8px;
@@ -104,11 +116,42 @@ export default defineComponent({
     }
 
     .nav-notice {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
       border-radius: 4px;
       width: 100%;
       height: 100%;
-      background: blue;
+
+      li {
+        height: 100%;
+        margin: 0 4px;
+        padding: 0 4px;
+        border-radius: 4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 1em;
+          height: 1em;
+        }
+      }
+
+      li:hover {
+        background: white;
+      }
     }
   }
 }
+
+.date-picker {
+  font-size: 14px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
 </style>
