@@ -6,6 +6,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "dayjs": "^1.10.5",
     "sass": "^1.35.1",
     "vue": "^3.0.5"
   },

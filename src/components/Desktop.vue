@@ -27,14 +27,15 @@
           <SvgIcon name="up"></SvgIcon>
         </li>
         <li>
+          <SvgIcon name="wifi"></SvgIcon>
           <SvgIcon name="speaker"></SvgIcon>
+          <SvgIcon name="battery"></SvgIcon>
         </li>
         <li>
-          <SvgIcon name="wifi"></SvgIcon>
         </li>
         <li>
           <div class="date-picker">
-            <span>17:50</span>
+            <span>{{ currentTime }}</span>
             <span>2021/6/30</span>
           </div>
         </li>
@@ -46,19 +47,29 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent} from 'vue';
+import {computed, defineComponent, onMounted, ref} from "vue";
 import SvgIcon from "./SvgIcon.vue";
+import dayjs from "dayjs";
 
 export default defineComponent({
-  name: 'Desktop',
+  name: "Desktop",
   components: {SvgIcon},
   setup() {
+    const currentTime = ref(dayjs().format("HH:mm"));
+    const currentDate = ref(dayjs().format("YYYY/MM/DD"));
+    onMounted(() => {
+      setInterval(() => {
+        currentTime.value = dayjs().format("HH:mm");
+        currentDate.value = dayjs().format("YYYY/MM/DD");
+      }, 1000);
+    });
     const clickUseRight = (e: MouseEvent) => {
       e.preventDefault();
       console.log(e);
     };
     return {
-      clickUseRight
+      clickUseRight,
+      currentTime
     };
   }
 
