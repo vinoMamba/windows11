@@ -1,23 +1,23 @@
-import {readFileSync, readdirSync} from 'fs'
+// https://segmentfault.com/a/1190000039255368
+import {Plugin} from 'vite';
+import {readFileSync, readdirSync} from 'fs';
 
-let idPerfix = ''
-const svgTitle = /<svg([^>+].*?)>/
-const clearHeightWidth = /(width|height)="([^>+].*?)"/g
+let idPerfix = '';
+const svgTitle = /<svg([^>+].*?)>/;
+const clearHeightWidth = /(width|height)="([^>+].*?)"/g;
 
-const hasViewBox = /(viewBox="[^>+].*?")/g
+const hasViewBox = /(viewBox="[^>+].*?")/g;
 
-const clearReturn = /(\r)|(\n)/g
+const clearReturn = /(\r)|(\n)/g;
 
-function findSvgFile(dir) {
-    const svgRes = []
+function findSvgFile(dir: any): string[] {
+    const svgRes = [];
     const dirents = readdirSync(dir, {
         withFileTypes: true
-    })
-    console.log('dirents')
-    console.log(dirents)
+    });
     for (const dirent of dirents) {
         if (dirent.isDirectory()) {
-            svgRes.push(...findSvgFile(dir + dirent.name + '/'))
+            svgRes.push(...findSvgFile(dir + dirent.name + '/'));
         } else {
             const svg = readFileSync(dir + dirent.name)
                 .toString()
@@ -25,43 +25,44 @@ function findSvgFile(dir) {
                 .replace(svgTitle, ($1, $2) => {
                     // console.log(++i)
                     // console.log(dirent.name)
-                    let width = 0
-                    let height = 0
+                    let width = 0;
+                    let height = 0;
                     let content = $2.replace(
                         clearHeightWidth,
-                        (s1, s2, s3) => {
+                        (s1: any, s2: string, s3: any) => {
                             if (s2 === 'width') {
-                                width = s3
+                                width = s3;
                             } else if (s2 === 'height') {
-                                height = s3
+                                height = s3;
                             }
-                            return ''
+                            return '';
                         }
-                    )
+                    );
                     if (!hasViewBox.test($2)) {
-                        content += `viewBox="0 0 ${width} ${height}"`
+                        content += `viewBox="0 0 ${width} ${height}"`;
                     }
                     return `<symbol id="${idPerfix}-${dirent.name.replace(
                         '.svg',
                         ''
-                    )}" ${content}>`
+                    )}" ${content}>`;
                 })
-                .replace('</svg>', '</symbol>')
-            svgRes.push(svg)
+                .replace('</svg>', '</symbol>');
+            svgRes.push(svg);
         }
     }
-    return svgRes
+    return svgRes;
 }
 
-export const svgBuilder = (path, perfix = 'icon') => {
-    if (path === '') return
-    idPerfix = perfix
-    const res = findSvgFile(path)
-    // console.log(res.length)
+export const svgBuilder = (path: string, perfix = 'icon'): Plugin => {
+    if (path === '') { // @ts-ignore
+        return;
+    }
+    idPerfix = perfix;
+    const res = findSvgFile(path);
     // const res = []
     return {
         name: 'svg-transform',
-        transformIndexHtml(html) {
+        transformIndexHtml(html): string {
             return html.replace(
                 '<body>',
                 `
@@ -70,7 +71,7 @@ export const svgBuilder = (path, perfix = 'icon') => {
               ${res.join('')}
             </svg>
         `
-            )
+            );
         }
-    }
-}
+    };
+};

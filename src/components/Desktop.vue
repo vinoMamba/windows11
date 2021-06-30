@@ -3,8 +3,12 @@
     <main class="desktop-main">desktop</main>
     <nav class="desktop-nav">
       <ul class="nav-menu">
-        <li></li>
-        <li></li>
+        <li>
+          <SvgIcon name="excel"></SvgIcon>
+        </li>
+        <li>
+          <SvgIcon name="word"></SvgIcon>
+        </li>
         <li></li>
         <li></li>
       </ul>
@@ -19,9 +23,11 @@
 </template>
 <script lang="ts">
 import {defineComponent} from 'vue';
+import SvgIcon from "./SvgIcon.vue";
 
 export default defineComponent({
-  name: 'Desktop'
+  name: 'Desktop',
+  components: {SvgIcon}
 });
 </script>
 <style lang="scss" scoped>
@@ -55,7 +61,7 @@ export default defineComponent({
       border-radius: 4px;
       width: 100%;
       height: 100%;
-      background: #304455;
+      border: 1px solid red;
     }
 
     .nav-notice {
