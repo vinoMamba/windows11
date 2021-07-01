@@ -24,19 +24,16 @@
       </ul>
       <ul class="nav-notice">
         <li>
-          <SvgIcon name="up"></SvgIcon>
-        </li>
-        <li>
-          <SvgIcon name="wifi"></SvgIcon>
-          <SvgIcon name="speaker"></SvgIcon>
-          <SvgIcon name="battery"></SvgIcon>
-        </li>
-        <li>
+          <div class="system-component">
+            <SvgIcon name="wifi"></SvgIcon>
+            <SvgIcon name="speaker"></SvgIcon>
+            <SvgIcon name="battery"></SvgIcon>
+          </div>
         </li>
         <li>
           <div class="date-picker">
             <span>{{ currentTime }}</span>
-            <span>2021/6/30</span>
+            <span>{{ currentDate }}</span>
           </div>
         </li>
         <li>
@@ -69,7 +66,8 @@ export default defineComponent({
     };
     return {
       clickUseRight,
-      currentTime
+      currentTime,
+      currentDate
     };
   }
 
@@ -90,7 +88,7 @@ export default defineComponent({
   }
 
   &-nav {
-    padding: 0 4px;
+    padding: 4px;
     display: grid;
     grid-template-columns:20% auto 20%;
     grid-template-rows: 100%;
@@ -99,7 +97,20 @@ export default defineComponent({
     width: 100%;
     height: 5vh;
     background: #d6dff4;
-    opacity: .9;
+    opacity: .85;
+
+    li {
+      margin: 0 4px;
+      padding: 0 4px;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    li:hover {
+      background: white;
+    }
 
     .nav-menu {
       grid-column-start: 2;
@@ -112,18 +123,7 @@ export default defineComponent({
       li {
         width: 36px;
         height: 36px;
-        margin: 0 4px;
-        padding: 0 4px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
       }
-
-      li:hover {
-        background: white;
-      }
-
     }
 
     .nav-notice {
@@ -136,12 +136,6 @@ export default defineComponent({
 
       li {
         height: 100%;
-        margin: 0 4px;
-        padding: 0 4px;
-        border-radius: 4px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
 
         svg {
           width: 1em;
@@ -149,20 +143,28 @@ export default defineComponent({
         }
       }
 
-      li:hover {
-        background: white;
+      .system-component {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+
+        svg {
+          margin: 0 4px;
+        }
+      }
+
+      .date-picker {
+        font-size: 14px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
       }
     }
   }
 }
 
-.date-picker {
-  font-size: 14px;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
 
 </style>
