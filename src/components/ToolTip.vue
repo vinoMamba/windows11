@@ -27,7 +27,7 @@ export default defineComponent({
   visibility: hidden;
   position: absolute;
   bottom: 100%;
-  left: 100%;
+  left: 50%;
   transform: translate(-50%, -50%);
   transition: all .3s;
   opacity: 0;

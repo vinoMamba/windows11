@@ -35,10 +35,7 @@
           </div>
         </li>
         <li>
-          <div class="date-picker">
-            <span>{{ currentTime }}</span>
-            <span>{{ currentDate }}</span>
-          </div>
+          <DatePicker/>
         </li>
         <li>
           <SvgIcon name="drawer"></SvgIcon>
@@ -48,31 +45,21 @@
   </div>
 </template>
 <script lang="ts">
-import {defineComponent, onMounted, ref} from "vue";
+import {defineComponent} from "vue";
 import SvgIcon from "./SvgIcon.vue";
-import dayjs from "dayjs";
 import Battery from "./Battery.vue";
 import ToolTip from "./ToolTip.vue";
+import DatePicker from "./DatePicker.vue";
 
 export default defineComponent({
   name: "Desktop",
-  components: {ToolTip, Battery, SvgIcon},
+  components: {DatePicker, ToolTip, Battery, SvgIcon},
   setup() {
-    const currentTime = ref(dayjs().format("HH:mm"));
-    const currentDate = ref(dayjs().format("YYYY/MM/DD"));
-    onMounted(() => {
-      setInterval(() => {
-        currentTime.value = dayjs().format("HH:mm");
-        currentDate.value = dayjs().format("YYYY/MM/DD");
-      }, 1000);
-    });
     const clickUseRight = (e: MouseEvent) => {
       e.preventDefault();
     };
     return {
       clickUseRight,
-      currentTime,
-      currentDate
     };
   }
 
@@ -154,19 +141,11 @@ export default defineComponent({
         justify-content: center;
         height: 100%;
 
-        svg {
+        &::v-deep(svg) {
           margin: 0 4px;
         }
       }
 
-      .date-picker {
-        font-size: 14px;
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-      }
     }
   }
 }
