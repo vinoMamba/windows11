@@ -1,10 +1,6 @@
 <template>
   <ToolTip :tip-content="tipContent">
-    <SvgIcon name="battery100" v-if="charging"></SvgIcon>
-    <SvgIcon name="battery" v-else-if="level >= .9"></SvgIcon>
-    <SvgIcon name="battery50" v-else-if="level > .5 && level < .9"></SvgIcon>
-    <SvgIcon name="battery25" v-else-if="level < .5"></SvgIcon>
-    <SvgIcon name="battery" v-else></SvgIcon>
+    <SvgIcon :name="batteryName"/>
   </ToolTip>
 </template>
 <script lang="ts">
@@ -16,16 +12,21 @@ import {useBattery} from "../hooks/useBattery";
 export default defineComponent({
   name: 'Battery',
   components: {ToolTip, SvgIcon},
-  setup() {
+  setup: function () {
+    const batteryName = ref('battery');
     const tipContent = ref('100%');
     const {level, charging} = useBattery();
+    const changeBatteryName = () => charging.value ? 'battery100' : level.value >= .9 ? 'battery' : level.value > .5 && level.value < .9 ? 'battery50' : 'battery25';
     watchEffect(() => {
       tipContent.value = level.value === 1 ? `电量充满(100%)` : `${level.value * 100}%剩余`;
+      batteryName.value = changeBatteryName();
+      console.log(batteryName.value);
     });
     return {
       tipContent,
       charging,
-      level
+      level,
+      batteryName
     };
   }
 });
