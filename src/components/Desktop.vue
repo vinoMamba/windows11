@@ -27,7 +27,7 @@
           <div class="system-component">
             <SvgIcon name="wifi"></SvgIcon>
             <SvgIcon name="speaker"></SvgIcon>
-            <SvgIcon name="battery"></SvgIcon>
+            <Battery/>
           </div>
         </li>
         <li>
@@ -44,13 +44,15 @@
   </div>
 </template>
 <script lang="ts">
-import {computed, defineComponent, onMounted, ref} from "vue";
+import {defineComponent, onMounted, ref} from "vue";
 import SvgIcon from "./SvgIcon.vue";
 import dayjs from "dayjs";
+import Battery from "./Battery.vue";
+import ToolTip from "./ToolTip.vue";
 
 export default defineComponent({
   name: "Desktop",
-  components: {SvgIcon},
+  components: {ToolTip, Battery, SvgIcon},
   setup() {
     const currentTime = ref(dayjs().format("HH:mm"));
     const currentDate = ref(dayjs().format("YYYY/MM/DD"));
@@ -137,7 +139,7 @@ export default defineComponent({
       li {
         height: 100%;
 
-        svg {
+        ::v-deep svg {
           width: 1em;
           height: 1em;
         }
