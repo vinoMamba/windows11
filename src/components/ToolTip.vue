@@ -1,5 +1,5 @@
 <template>
-  <span class="tool-tip" :tip="toolTip">
+  <span class="tool-tip" :tip="tipContent">
     <slot></slot>
   </span>
 </template>
@@ -9,7 +9,7 @@ import {defineComponent} from "vue";
 export default defineComponent({
   name: 'ToolTip',
   props: {
-    toolTip: {
+    tipContent: {
       type: String,
       default: ''
     }
