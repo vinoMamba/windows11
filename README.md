@@ -1,6 +1,4 @@
-# Vue 3 + Typescript + Vite
-
-This template should help get you started developing with Vue 3 and Typescript in Vite.
+<h1 align="center">🚀 Windows 11 by Vino</h1>
 
 ## Recommended IDE Setup
 
