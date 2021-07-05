@@ -25,8 +25,12 @@
       <ul class="nav-notice">
         <li>
           <div class="system-component">
-            <SvgIcon name="wifi"></SvgIcon>
-            <SvgIcon name="speaker"></SvgIcon>
+            <ToolTip tip-content="Internet access">
+              <SvgIcon name="wifi"/>
+            </ToolTip>
+            <ToolTip tip-content="扬声器/听筒:56%">
+              <SvgIcon name="speaker"/>
+            </ToolTip>
             <Battery/>
           </div>
         </li>
@@ -138,9 +142,9 @@ export default defineComponent({
       li {
         height: 100%;
 
-        ::v-deep svg {
-          width: 1.5em;
-          height: 1.5em;
+        &::v-deep(svg) {
+          width: 1.3em;
+          height: 1.3em;
         }
       }
 

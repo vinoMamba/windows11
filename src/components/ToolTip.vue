@@ -7,11 +7,11 @@
 import {defineComponent} from "vue";
 
 export default defineComponent({
-  name: 'ToolTip',
+  name: "ToolTip",
   props: {
     tipContent: {
       type: String,
-      default: ''
+      default: ""
     }
   },
 });
@@ -26,18 +26,16 @@ export default defineComponent({
   content: attr(tip);
   visibility: hidden;
   position: absolute;
-  top: 0;
+  bottom: 100%;
   left: 100%;
-  transform: translate(-5px, -50%);
+  transform: translate(-50%, -50%);
   transition: all .3s;
-
   opacity: 0;
-  /* 空白问题 */
   white-space: pre;
   font-size: 14px;
-  padding: 4px;
-  background-color: #ffffff;
-  border: 1px solid black;
+  padding: 6px;
+  background: white;
+  border-radius: 4px;
   color: black;
   box-shadow: 1px 1px 14px rgba(0, 0, 0, 0.1)
 }
