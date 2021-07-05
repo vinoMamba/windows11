@@ -1,6 +1,10 @@
 <template>
   <ToolTip :tip-content="tipContent">
-    <SvgIcon name="battery"></SvgIcon>
+    <SvgIcon name="battery100" v-if="charging"></SvgIcon>
+    <SvgIcon name="battery" v-else-if="level >= .9"></SvgIcon>
+    <SvgIcon name="battery50" v-else-if="level > .5 && level < .9"></SvgIcon>
+    <SvgIcon name="battery25" v-else-if="level < .5"></SvgIcon>
+    <SvgIcon name="battery" v-else></SvgIcon>
   </ToolTip>
 </template>
 <script lang="ts">
@@ -14,12 +18,14 @@ export default defineComponent({
   components: {ToolTip, SvgIcon},
   setup() {
     const tipContent = ref('100%');
-    const {level} = useBattery();
+    const {level, charging} = useBattery();
     watchEffect(() => {
       tipContent.value = level.value === 1 ? `电量充满(100%)` : `${level.value * 100}%剩余`;
     });
     return {
-      tipContent
+      tipContent,
+      charging,
+      level
     };
   }
 });

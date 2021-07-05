@@ -64,7 +64,6 @@ export default defineComponent({
     });
     const clickUseRight = (e: MouseEvent) => {
       e.preventDefault();
-      console.log(e);
     };
     return {
       clickUseRight,
@@ -140,8 +139,8 @@ export default defineComponent({
         height: 100%;
 
         ::v-deep svg {
-          width: 1em;
-          height: 1em;
+          width: 1.5em;
+          height: 1.5em;
         }
       }
 
