@@ -23,7 +23,6 @@ export default defineComponent({
     return {
       currentTime,
       currentDate,
-      currentDateZh
     };
   }
 });
