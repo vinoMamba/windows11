@@ -3,3 +3,5 @@
 [预览地址](http://101.34.105.102:3324/windows11/index.html)
 
 - 使用了 Vite +Vue3.0 ，实践了如何在 Vuex 项目中封装 Vue Hooks
+
+- 尝试去理解 Vite 插件的制作原理以及实践
